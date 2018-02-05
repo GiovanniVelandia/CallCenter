@@ -1,0 +1,5 @@
+Se contemplo la manera como manejar la llamada numero 11 esta llamada de la siguiente manera 
+
+Se da un timepo de espera para que la llamada pueda ser atendida est tiempo puede ser variable.
+
+Si despues de un tiempo no es atendida se muestra un mensaje de estado No exitoso.
