@@ -1,0 +1,11 @@
+/**
+ *  Clase que se encarga de representar al empleado en el sistema 
+ * @author GIOVANNI-PC
+ *
+ */
+public class TipoEmpleado {
+
+	private String nombre;
+	private String TipoEmplado;
+	
+}

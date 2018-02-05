@@ -1,0 +1,12 @@
+package co.com.almundo.callCenter.empleado;
+/**
+ *  Clase que se encarga de representar al empleado en el sistema 
+ * @author GIOVANNI-PC
+ *
+ */
+public class Empleado {
+
+	private String nombre;
+	private String TipoEmplado;
+	
+}

@@ -1,0 +1,23 @@
+package co.com.almundo.callCenter.negocio;
+import co.com.almundo.callCenter.empleado.EmpleadoCallCenter;
+import co.com.almundo.callCenter.llamada.Llamada;
+
+public class Main {
+
+	public static void main(String[] args) {
+		
+		//Administrar empleados
+		EmpleadoCallCenter empleadoCallCenter = new EmpleadoCallCenter();
+		empleadoCallCenter.asignarEmpleados();
+		
+		//Administrar llamadas
+		Llamada llamada = new Llamada();
+
+		// Numero de llamadas
+		for (int i = 0; i < 49; i++) {
+			Runnable llamada = new Dispatcher(empleadoCallCenter,llamada);
+			new Thread(llamada).start();
+		}
+	}
+
+}

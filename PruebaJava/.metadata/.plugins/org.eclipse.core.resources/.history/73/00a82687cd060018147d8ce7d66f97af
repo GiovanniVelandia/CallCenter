@@ -1,0 +1,126 @@
+package co.com.almundo.callCenter.empleado;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import co.com.almundo.callCenter.enumeracion.EnumTipoEmpleado;
+
+public class EmpleadoCallCenter {
+
+	private List<Empleado> empleados;
+
+	public EmpleadoCallCenter() {
+		empleados = new ArrayList<>();
+	}
+
+	/**
+	 * 
+	 */
+	public void asignarEmpleados() {
+		Empleado empleadoAdd = new Empleado();
+		empleadoAdd.setId(1);
+		TipoEmpleado tipoEmpleado = new TipoEmpleado();
+		tipoEmpleado.setId(EnumTipoEmpleado.OPERADOR.getCodigo());
+		empleadoAdd.setTipoEmpleado(tipoEmpleado);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(2);
+		tipoEmpleado = new TipoEmpleado();
+		tipoEmpleado.setId(EnumTipoEmpleado.OPERADOR.getCodigo());
+		empleadoAdd.setTipoEmpleado(tipoEmpleado);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(3);
+		tipoEmpleado = new TipoEmpleado();
+		tipoEmpleado.setId(EnumTipoEmpleado.OPERADOR.getCodigo());
+		empleadoAdd.setTipoEmpleado(tipoEmpleado);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(4);
+		tipoEmpleado = new TipoEmpleado();
+		tipoEmpleado.setId(EnumTipoEmpleado.OPERADOR.getCodigo());
+		empleadoAdd.setTipoEmpleado(tipoEmpleado);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(5);
+		tipoEmpleado = new TipoEmpleado();
+		tipoEmpleado.setId(EnumTipoEmpleado.OPERADOR.getCodigo());
+		empleadoAdd.setTipoEmpleado(tipoEmpleado);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(6);
+		tipoEmpleado = new TipoEmpleado();
+		tipoEmpleado.setId(EnumTipoEmpleado.OPERADOR.getCodigo());
+		empleadoAdd.setTipoEmpleado(tipoEmpleado);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(7);
+		tipoEmpleado = new TipoEmpleado();
+		tipoEmpleado.setId(EnumTipoEmpleado.OPERADOR.getCodigo());
+		empleadoAdd.setTipoEmpleado(tipoEmpleado);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(8);
+		tipoEmpleado = new TipoEmpleado();
+		tipoEmpleado.setId(EnumTipoEmpleado.SUPERVISOR.getCodigo());
+		empleadoAdd.setTipoEmpleado(tipoEmpleado);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(9);
+		tipoEmpleado = new TipoEmpleado();
+		tipoEmpleado.setId(EnumTipoEmpleado.SUPERVISOR.getCodigo());
+		empleadoAdd.setTipoEmpleado(tipoEmpleado);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(10);
+		tipoEmpleado = new TipoEmpleado();
+		tipoEmpleado.setId(EnumTipoEmpleado.DIRECTOR.getCodigo());
+		empleadoAdd.setTipoEmpleado(tipoEmpleado);
+		asignarEmpleado(empleadoAdd);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public synchronized Empleado obtenerEmpleado() {
+		Empleado empleado = null;
+		for (Empleado empleadoL : empleados) {
+			if (!empleadoL.isAsignado()) {
+				empleado = empleadoL;
+				empleado.setAsignado(true);
+				break;
+			}
+		}
+		return empleado;
+	}
+
+	/**
+	 * 
+	 * @param empleado
+	 */
+	public void cambiarEstadoLibre(Empleado empleado) {
+		for (Empleado empleadoL : empleados) {
+			if (empleadoL.equals(empleado)) {
+				empleadoL.setAsignado(false);
+				break;
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param empleado
+	 */
+	public void asignarEmpleado(Empleado empleado) {
+		this.empleados.add(empleado);
+	}
+
+	public List<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(List<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+}

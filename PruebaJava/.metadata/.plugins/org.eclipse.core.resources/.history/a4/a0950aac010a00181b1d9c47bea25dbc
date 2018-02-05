@@ -1,0 +1,79 @@
+package co.com.almundo.callCenter.negocio;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import co.com.almundo.callCenter.empleado.Empleado;
+import co.com.almundo.callCenter.llamada.Llamada;
+
+public class Dispatcher implements Runnable {
+
+	private CallCenter callCenter;
+	private Llamada llamada;
+
+	public Dispatcher(CallCenter empleadoCallCenter, Llamada llamada) {
+		this.callCenter = empleadoCallCenter;
+		this.llamada = llamada;
+	}
+
+	private int duracion = (int) (Math.random() * (10000 - 5000 + 1) + 5000);
+	private int espera = 7000;
+
+	@Override
+	public void run() {
+		try {
+			Empleado empleado = dispatchCall();
+
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+			
+			// Inicio
+			LocalDateTime fechaInicio = LocalDateTime.now();
+			llamada.setFechaInicio(dtf.format(fechaInicio));
+
+			if (empleado != null) {
+
+				// Empleado
+				llamada.setEmpleado(empleado);
+				procesarLLamada(empleado);
+			} else {
+				Thread.sleep(this.espera);
+				empleado = dispatchCall();
+				LocalDateTime fechaInicioE = LocalDateTime.now();
+				llamada.setFechaInicio(dtf.format(fechaInicioE));
+				if (empleado != null) {
+					llamada.setEmpleado(empleado);
+					procesarLLamada(empleado);
+				} else {
+					System.out.println("En este momento no hay operadores para atender su llamada");
+				}
+			}
+
+			// Fin
+			LocalDateTime fechaFin = LocalDateTime.now();
+			llamada.setFechaFin(dtf.format(fechaFin));
+
+		} catch (InterruptedException ex) {
+			Logger.getLogger(Dispatcher.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Empleado dispatchCall() {
+		return this.callCenter.obtenerEmpleado();
+	}
+
+	/**
+	 * @throws InterruptedException
+	 * 
+	 */
+	public void procesarLLamada(Empleado empleado) throws InterruptedException {
+		Thread.sleep(this.duracion);
+		this.callCenter.cambiarEstadoLibre(empleado);
+	}
+}

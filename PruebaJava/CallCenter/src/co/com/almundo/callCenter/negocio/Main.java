@@ -1,0 +1,67 @@
+package co.com.almundo.callCenter.negocio;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import co.com.almundo.callCenter.llamada.Llamada;
+
+/**
+ * Clase Main
+ * 
+ * @author GIOVANNI-PC
+ *
+ */
+public class Main {
+
+	/**
+	 * @author GIOVANNI-PC
+	 * @param args
+	 * @throws InterruptedException
+	 */
+	public static void main(String[] args) throws InterruptedException {
+
+		int espera = 7000;
+		
+		// Administrar empleados
+		CallCenter callCenter = new CallCenter();
+		callCenter.asignarEmpleados();
+
+		// Administrar llamadas
+		Llamada llamada = new Llamada();
+
+		List<Thread> hilos = new ArrayList<>();
+
+		// Numero de llamadas
+		for (int i = 0; i < 10; i++) {
+			llamada = new Llamada();
+			llamada.setNumerollamada(i);
+			Runnable procesoLlamada = new Dispatcher(callCenter, llamada, espera);
+			Thread thread = new Thread(procesoLlamada);
+			thread.start();
+			hilos.add(thread);
+			callCenter.getLlamadas().add(llamada);
+		}
+
+		for (Thread hilo : hilos) {
+			hilo.join();
+		}
+
+		for (Llamada llamadaImp : callCenter.getLlamadas()) {
+			System.out.println("Numero de llamada: " + llamadaImp.getNumerollamada());
+			if (llamadaImp.getEmpleado() != null) {
+				System.out.println("  Codigo empleado: " + llamadaImp.getEmpleado().getCodigo());
+				System.out.println("  Tipo empleado: " + llamadaImp.getEmpleado().getTipoEmpleado().getCargo());
+				System.out.println("  Fecha inicio: " + llamadaImp.getFechaInicio());
+				System.out.println("  Fecha fin: " + llamadaImp.getFechaFin());
+				System.out.println("  Estado llamada: " + llamadaImp.getEstadoLLamada());
+			} else {
+				System.out.println("  Codigo empleado: " + "No disponible");
+				System.out.println("  Tipo empleado: " + "No disponible");
+				System.out.println("  Fecha inicio: " + llamadaImp.getFechaInicio());
+				System.out.println("  Fecha fin: " + "No disponible");
+				System.out.println("  Estado llamada: " + llamadaImp.getEstadoLLamada());
+			}
+		}
+	}
+
+}

@@ -1,0 +1,45 @@
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import co.com.almundo.callCenter.empleado.Empleado;
+import co.com.almundo.callCenter.empleado.EmpleadoCallCenter;
+
+public class Dispatcher implements Runnable {
+
+	private EmpleadoCallCenter empleadoCallCenter;
+
+	public Dispatcher(EmpleadoCallCenter empleadoCallCenter) {
+		this.empleadoCallCenter = empleadoCallCenter;
+	}
+
+	private int duracion = 10000;
+
+	@Override
+	public void run() {
+
+		try {
+			Empleado empleado = dispatchCall();
+
+			if (empleado != null) {
+				System.out.println("Empeze" + empleado.getId() + "" + empleado.isAsignado());
+				Thread.sleep(this.duracion);
+				this.empleadoCallCenter.cambiarEstadoLibre(empleado);
+				System.out.println("Termine" + empleado.getId() + "" + empleado.isAsignado());
+			} else {
+				System.out.println("No hay empleados");
+			}
+
+		} catch (InterruptedException ex) {
+			Logger.getLogger(Dispatcher.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Empleado dispatchCall() {
+		return this.empleadoCallCenter.obtenerEmpleado();
+	}
+}

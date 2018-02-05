@@ -1,0 +1,41 @@
+package co.com.almundo.callCenter.negocio;
+
+import co.com.almundo.callCenter.llamada.Llamada;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		// Administrar empleados
+		CallCenter callCenter = new CallCenter();
+		callCenter.asignarEmpleados();
+
+		// Administrar llamadas
+		Llamada llamada = new Llamada();
+
+		// Numero de llamadas
+		for (int i = 0; i < 49; i++) {
+			llamada = new Llamada();
+			llamada.setNumerollamada(i);
+			Runnable procesoLlamada = new Dispatcher(callCenter, llamada);
+			new Thread(procesoLlamada).start();
+			callCenter.getLlamadas().add(llamada);
+		}
+
+		for (Llamada llamadaImp : callCenter.getLlamadas()) {
+			System.out.println("Numero de llamada: " + llamadaImp.getNumerollamada());
+			if (llamadaImp.getEmpleado() != null) {
+				System.out.println("  Codigo empleado: " + llamadaImp.getEmpleado().getCodigo());
+				System.out.println("  Tipo empleado: " + llamadaImp.getEmpleado().getTipoEmpleado().getCargo());
+				System.out.println("  Fecha inicio: " + llamadaImp.getFechaInicio());
+				System.out.println("  Fecha fin: " + llamadaImp.getFechaFin());
+			} else {
+				System.out.println("  Codigo empleado: " + "No disponible");
+				System.out.println("  Tipo empleado: " + "No disponible");
+				System.out.println("  Tipo empleado: " + "No disponible");
+				System.out.println("  Tipo empleado: " + "No disponible");
+			}
+		}
+	}
+
+}

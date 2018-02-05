@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.Random"/>
+<fullyQualifiedTypeName name="Llamada"/>
+<fullyQualifiedTypeName name="java.util.logging.Level"/>
+<fullyQualifiedTypeName name="java.util.logging.Logger"/>
+<fullyQualifiedTypeName name="Main"/>
+<fullyQualifiedTypeName name="java.lang.Runnable"/>
+<fullyQualifiedTypeName name="Dispatcher"/>
+<fullyQualifiedTypeName name="co.com.almundo.callCenter.empleado.EmpleadoCallCenter"/>
+<fullyQualifiedTypeName name="co.com.almundo.callCenter.empleado.TipoEmpleado"/>
+<fullyQualifiedTypeName name="co.com.almundo.callCenter.enumeracion.EnumTipoEmpleado"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="java.lang.Thread"/>
+<fullyQualifiedTypeName name="co.com.almundo.callCenter.llamada.RegistroLlamada"/>
+<fullyQualifiedTypeName name="co.com.almundo.callCenter.llamada.Llamada"/>
+<fullyQualifiedTypeName name="co.com.almundo.callCenter.empleado.Empleado"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="java.util.Calendar"/>
+<fullyQualifiedTypeName name="java.time.LocalDate"/>
+<fullyQualifiedTypeName name="java.time.format.DateTimeFormatter"/>
+<fullyQualifiedTypeName name="java.time.LocalDateTime"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+</qualifiedTypeNameHistroy>

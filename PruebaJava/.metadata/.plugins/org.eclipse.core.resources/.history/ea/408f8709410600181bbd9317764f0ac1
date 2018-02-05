@@ -1,0 +1,91 @@
+package co.com.almundo.callCenter.empleado;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmpleadoCallCenter {
+
+	private List<Empleado> empleados;
+
+	public EmpleadoCallCenter() {
+		empleados = new ArrayList<>();
+	}
+
+	/**
+	 * 
+	 */
+	public void asignarEmpleados() {
+		Empleado empleadoAdd = new Empleado();
+		empleadoAdd.setId(1);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(2);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(3);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(4);
+		asignarEmpleado(empleadoAdd);
+		empleadoAdd = new Empleado();
+		empleadoAdd.setId(5);
+		asignarEmpleado(empleadoAdd);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	public Empleado obtenerEmpleado() {
+		Empleado empleado = null;
+		for (Empleado empleadoL : empleados) {
+			if (!empleadoL.isAsignado()) {
+				empleado = empleadoL;
+				break;
+			}
+		}
+		return empleado;
+	}
+
+	/**
+	 * 
+	 * @param empleado
+	 */
+	public void cambiarEstadoAsignado(Empleado empleado) {
+		for (Empleado empleadoL : empleados) {
+			if (empleadoL.equals(empleado)) {
+				empleadoL.setAsignado(true);
+				break;
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param empleado
+	 */
+	public void cambiarEstadoLibre(Empleado empleado) {
+		for (Empleado empleadoL : empleados) {
+			if (empleadoL.equals(empleado)) {
+				empleadoL.setAsignado(false);
+				break;
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param empleado
+	 */
+	public void asignarEmpleado(Empleado empleado) {
+		this.empleados.add(empleado);
+	}
+
+	public List<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(List<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+}

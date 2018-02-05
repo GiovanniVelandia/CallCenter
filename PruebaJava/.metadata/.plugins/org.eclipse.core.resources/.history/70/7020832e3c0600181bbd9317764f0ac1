@@ -1,0 +1,39 @@
+package co.com.almundo.callCenter.empleado;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class EmpleadoCallCenter {
+
+	private List<Empleado> empleados;
+	private Empleado empleado;
+
+	public EmpleadoCallCenter() {
+		empleados = new ArrayList<>();
+	}
+
+	public void obtenerEmpleado() {
+		for (Empleado empleadoL : empleados) {
+			if (!empleadoL.isAsignado()) {
+				this.empleado = empleadoL;
+				break;
+			}
+		}
+	}
+
+	/**
+	 * 
+	 * @param empleado
+	 */
+	public void asignarEmpleado(Empleado empleado) {
+		this.empleados.add(empleado);
+	}
+
+	public List<Empleado> getEmpleados() {
+		return empleados;
+	}
+
+	public void setEmpleados(List<Empleado> empleados) {
+		this.empleados = empleados;
+	}
+}

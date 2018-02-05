@@ -1,0 +1,5 @@
+package co.com.almundo.callCenter.llamada;
+
+public class RegistroLlamada {
+
+}

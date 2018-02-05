@@ -1,0 +1,28 @@
+
+import co.com.almundo.callCenter.empleado.Empleado;
+import co.com.almundo.callCenter.empleado.EmpleadoCallCenter;
+
+public class Main {
+
+	public static void main(String[] args) {
+		EmpleadoCallCenter empleadoCallCenter = new EmpleadoCallCenter();
+
+		for (int i = 0; i < 10; i++) {
+			Empleado empleado = new Empleado();
+			empleado.setId(i);
+			empleadoCallCenter.asignarEmpleado(empleado);
+		}
+
+		// Numero de llamadas
+		for (int i = 0; i < 2; i++) {
+			Thread llamada = new Dispatcher(empleadoCallCenter.getEmpleados());
+			llamada.start();
+		}
+
+		for (Empleado empleado : empleadoCallCenter.getEmpleados()) {
+			System.out.println(empleado.getId());
+		}
+
+	}
+
+}

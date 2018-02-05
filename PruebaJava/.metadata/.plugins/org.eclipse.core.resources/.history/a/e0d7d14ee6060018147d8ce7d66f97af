@@ -1,0 +1,29 @@
+package co.com.almundo.callCenter.negocio;
+
+import co.com.almundo.callCenter.llamada.Llamada;
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		// Administrar empleados
+		CallCenter callCenter = new CallCenter();
+		callCenter.asignarEmpleados();
+
+		// Administrar llamadas
+		Llamada llamada = new Llamada();
+
+		// Numero de llamadas
+		for (int i = 0; i < 49; i++) {
+			llamada.setNumerollamada(i);
+			Runnable procesoLlamada = new Dispatcher(callCenter, llamada);
+			new Thread(procesoLlamada).start();
+			callCenter.getLlamadas().add(llamada);
+		}
+
+		for (Llamada llamadaImp : callCenter.getLlamadas()) {
+			System.out.println("Numero de llamada: " + llamadaImp.getNumerollamada());
+		}
+	}
+
+}

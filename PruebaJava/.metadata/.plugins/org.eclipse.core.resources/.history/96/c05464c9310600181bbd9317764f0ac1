@@ -1,0 +1,39 @@
+package co.com.almundo.callCenter.empleado;
+
+/**
+ * Clase que se encarga de representar al empleado en el sistema
+ * 
+ * @author GIOVANNI-PC
+ *
+ */
+public class Empleado {
+
+	private String nombre;
+	private TipoEmpleado tipoEmpleado;
+	private boolean asignado;
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public TipoEmpleado getTipoEmpleado() {
+		return tipoEmpleado;
+	}
+
+	public void setTipoEmpleado(TipoEmpleado tipoEmpleado) {
+		this.tipoEmpleado = tipoEmpleado;
+	}
+
+	public boolean isAsignado() {
+		return asignado;
+	}
+
+	public void setAsignado(boolean asignado) {
+		this.asignado = asignado;
+	}
+
+}

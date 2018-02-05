@@ -1,0 +1,101 @@
+package co.com.almundo.callCenter.negocio;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import co.com.almundo.callCenter.empleado.Empleado;
+import co.com.almundo.callCenter.llamada.Llamada;
+
+/**
+ * Calse de que encarga de procesar las llamadas de modo concurrente
+ * 
+ * @author GIOVANNI-PC
+ *
+ */
+public class Dispatcher implements Runnable {
+
+	private CallCenter callCenter;
+	private Llamada llamada;
+	private int duracion;
+	private static final String PATTERN = "yyyy/MM/dd HH:mm:ss";
+
+	public Dispatcher(CallCenter empleadoCallCenter, Llamada llamada) {
+		this.callCenter = empleadoCallCenter;
+		this.llamada = llamada;
+		// LLama la duracion llamada
+		duracionLlamada();
+	}
+
+	/**
+	 * Metodo que se encarga de asignas el tiempo de la llamada aleatoriamente
+	 * entre 5 y 10 segundos
+	 * 
+	 * @author GIOVANNI-PC
+	 */
+	public void duracionLlamada() {
+		duracion = (int) (Math.random() * (10000 - 5000 + 1) + 5000);
+	}
+
+	private int espera = 7000;
+
+	@Override
+	public void run() {
+		try {
+
+			// Se encarga de asignar el empleado
+			Empleado empleado = dispatchCall();
+
+			DateTimeFormatter dtf = DateTimeFormatter.ofPattern(PATTERN);
+
+			// Inicio
+			LocalDateTime fechaInicio = LocalDateTime.now();
+			llamada.setFechaInicio(dtf.format(fechaInicio));
+			if (empleado != null) {
+				// Empleado para el log
+				llamada.setEmpleado(empleado);
+				procesarLLamada(empleado);
+			} else {
+				Thread.sleep(this.espera);
+				empleado = dispatchCall();
+				LocalDateTime fechaInicioE = LocalDateTime.now();
+				llamada.setFechaInicio(dtf.format(fechaInicioE));
+				if (empleado != null) {
+					llamada.setEmpleado(empleado);
+					procesarLLamada(empleado);
+				} else {
+					System.out.println("En este momento no hay operadores para atender su llamada");
+				}
+			}
+
+			// Fin
+			LocalDateTime fechaFin = LocalDateTime.now();
+			llamada.setFechaFin(dtf.format(fechaFin));
+
+		} catch (InterruptedException ex) {
+			Logger.getLogger(Dispatcher.class.getName()).log(Level.SEVERE, null, ex);
+		}
+
+	}
+
+	/**
+	 * Metodo que se encarga de llamar los empleados disponibles y asignarlo a
+	 * la llamada en proceso
+	 * 
+	 * @author GIOVANNI-PC
+	 * @return
+	 */
+	public Empleado dispatchCall() {
+		return this.callCenter.obtenerEmpleado();
+	}
+
+	/**
+	 * @throws InterruptedException
+	 * 
+	 */
+	public void procesarLLamada(Empleado empleado) throws InterruptedException {
+		Thread.sleep(this.duracion);
+		this.callCenter.cambiarEstadoLibre(empleado);
+	}
+}

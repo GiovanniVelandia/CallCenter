@@ -1,0 +1,99 @@
+package co.com.almundo.callCenter.test;
+
+import static org.junit.Assert.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.junit.Test;
+
+import co.com.almundo.callCenter.llamada.Llamada;
+import co.com.almundo.callCenter.negocio.CallCenter;
+import co.com.almundo.callCenter.negocio.Dispatcher;
+
+public class TestUnitario {
+
+	@Test
+	public void asigancionEmpleados() {
+		// Se ingresan 8 empleados
+		// Administrar empleados
+		CallCenter callCenter = new CallCenter();
+		callCenter.asignarEmpleados();
+		assertEquals(8, callCenter.getEmpleados().size());
+	}
+
+	@Test
+	public void simularDiezLLamadasConcurrentesExitoso() {
+		// timepo de espera
+		int espera = 7000;
+		// Administrar empleados
+		CallCenter callCenter = new CallCenter();
+		callCenter.asignarEmpleados();
+
+		// Administrar llamadas
+		Llamada llamada = new Llamada();
+
+		List<Thread> hilos = new ArrayList<>();
+
+		// Numero de llamadas
+		for (int i = 0; i < 10; i++) {
+			llamada = new Llamada();
+			llamada.setNumerollamada(i);
+			Runnable procesoLlamada = new Dispatcher(callCenter, llamada, espera);
+			Thread thread = new Thread(procesoLlamada);
+			thread.start();
+			hilos.add(thread);
+			callCenter.getLlamadas().add(llamada);
+		}
+
+		for (Thread hilo : hilos) {
+			try {
+				hilo.join();
+			} catch (InterruptedException e) {
+				assertEquals("-1", e.getMessage());
+			}
+		}
+
+		for (Llamada llamadaImp : callCenter.getLlamadas()) {
+			assertEquals("Exitoso", llamadaImp.getEstadoLLamada());
+		}
+	}
+	
+	@Test
+	public void simularDiezLLamadasConcurrentesFallido() {
+		// timepo de espera
+		int espera = 1000;
+		// Administrar empleados
+		CallCenter callCenter = new CallCenter();
+		callCenter.asignarEmpleados();
+
+		// Administrar llamadas
+		Llamada llamada = new Llamada();
+
+		List<Thread> hilos = new ArrayList<>();
+
+		// Numero de llamadas
+		for (int i = 0; i < 10; i++) {
+			llamada = new Llamada();
+			llamada.setNumerollamada(i);
+			Runnable procesoLlamada = new Dispatcher(callCenter, llamada, espera);
+			Thread thread = new Thread(procesoLlamada);
+			thread.start();
+			hilos.add(thread);
+			callCenter.getLlamadas().add(llamada);
+		}
+
+		for (Thread hilo : hilos) {
+			try {
+				hilo.join();
+			} catch (InterruptedException e) {
+				assertEquals("-1", e.getMessage());
+			}
+		}
+
+		for (Llamada llamadaImp : callCenter.getLlamadas()) {
+			assertEquals("Exitoso", llamadaImp.getEstadoLLamada());
+		}
+	}
+
+}

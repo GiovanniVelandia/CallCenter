@@ -1,0 +1,66 @@
+package co.com.almundo.callCenter.llamada;
+
+/**
+ * Clase que se encarga de representar una llamada en el sistema 
+ * @author GIOVANNI-PC
+ */
+import co.com.almundo.callCenter.empleado.Empleado;
+
+public class Llamada {
+
+	private int numerollamada;
+	private Empleado empleado;
+	private String fechaInicio;
+	private String fechaFin;
+	private String fechaAtencion;
+	private String estadoLLamada;
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
+
+	public int getNumerollamada() {
+		return numerollamada;
+	}
+
+	public void setNumerollamada(int numerollamada) {
+		this.numerollamada = numerollamada;
+	}
+
+	public String getFechaInicio() {
+		return fechaInicio;
+	}
+
+	public void setFechaInicio(String fechaInicio) {
+		this.fechaInicio = fechaInicio;
+	}
+
+	public String getFechaFin() {
+		return fechaFin;
+	}
+
+	public void setFechaFin(String fechaFin) {
+		this.fechaFin = fechaFin;
+	}
+
+	public String getEstadoLLamada() {
+		return estadoLLamada;
+	}
+
+	public void setEstadoLLamada(String estadoLLamada) {
+		this.estadoLLamada = estadoLLamada;
+	}
+
+	public String getFechaAtencion() {
+		return fechaAtencion;
+	}
+
+	public void setFechaAtencion(String fechaAtencion) {
+		this.fechaAtencion = fechaAtencion;
+	}
+
+}

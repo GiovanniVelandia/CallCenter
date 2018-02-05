@@ -1,0 +1,24 @@
+package co.com.almundo.callCenter.test;
+
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+import co.com.almundo.callCenter.negocio.CallCenter;
+
+public class TestUnitario {
+
+	@Test
+	public void asigancionEmpleados() {
+		//Se ingresan 8 empleados
+		// Administrar empleados
+		CallCenter callCenter = new CallCenter();
+		callCenter.asignarEmpleados();
+		
+		callCenter.getEmpleados();
+		
+		assertEquals(8, callCenter.getEmpleados());
+
+	}
+
+}

@@ -1,0 +1,17 @@
+package co.com.almundo.callCenter.llamada;
+
+import co.com.almundo.callCenter.empleado.Empleado;
+
+public class Llamada {
+
+	private Empleado empleado;
+
+	public Empleado getEmpleado() {
+		return empleado;
+	}
+
+	public void setEmpleado(Empleado empleado) {
+		this.empleado = empleado;
+	}
+
+}
